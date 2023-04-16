@@ -2,6 +2,30 @@ window.addEventListener("load", allStorage);
 
 document.querySelector("#btn").addEventListener("click", addDeal);
 document.querySelector("#srt").addEventListener("click", sortDate);
+document.querySelector("#sea").addEventListener("click", searchDate);
+
+function searchDate()
+{
+    //document.querySelector("#dl").placeholder  = "enter date for search";    
+    document.querySelector("#list").innerHTML = "";
+
+    let date = document.querySelector("#dl").value;    
+    let keys = getKeys(false);
+    for (let i=0; i<keys.length; i++)
+    {
+        if(keys[i] == date)
+        {
+            let found = JSON.parse(localStorage.getItem(keys[i], "[]"));            
+            console.log(found);
+            for(let j=0; j<found.length; j++)
+            {
+                let minsName = found[j].split('→');        
+                createLI(minsName[1], keys[i], minsName[0]);
+            }
+            break;
+        }
+    }
+}
 
 function sortDate()
 {
@@ -65,9 +89,11 @@ function createLI(deal, date, time)
         
     p.addEventListener("click", ()=>
     {
-        document.querySelector("#list").removeChild(li);
-        delStorageItem(deal, date, time);
+        //document.querySelector("#list").removeChild(li);
+        delStorageItem(deal, date, time);        
         clearInput();
+        document.querySelector("#list").innerHTML = "";
+        allStorage(false);
     }); 
 }
 
