@@ -1,0 +1,50 @@
+*
+{
+    border: 0;
+}
+body
+{
+    background-image: url('../img/background.jpg');
+    text-align: center;
+}
+textarea
+{
+    padding: 1em;
+}
+input
+{
+    width: 12%;
+    height: 1.8em;
+    text-align: right;
+}
+label
+{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+button
+{
+    width: 6%;
+    height: 1.8 em;
+}
+ul
+{
+    display:flex;
+    flex-wrap: wrap;    
+    font-size: 1.5em;
+}
+li
+{
+    background-image: url("../img/note.png");
+    height: 280px;
+    width:260px;
+    overflow-wrap: break-word;
+   
+    display: flex; 
+    justify-content: center;  
+    align-items: center;
+}
+li p
+{
+    margin-top: 10em;
+}
