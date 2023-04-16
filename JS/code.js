@@ -1,13 +1,27 @@
 window.addEventListener("load", allStorage);
 
 document.querySelector("#btn").addEventListener("click", addDeal);
+document.querySelector("#srt").addEventListener("click", sortDate);
 
-function allStorage() 
+function sortDate()
+{
+    document.querySelector("#list").innerHTML = "";
+    allStorage(true);
+}
+
+function getKeys(isSort)
+{
+    let keys = Object.keys(localStorage);
+    if(isSort) keys.sort();
+    return keys;
+}
+
+function allStorage(isSort = false) 
 {  
     //localStorage.clear();
     //localStorage.removeItem("2023-04-18");
 
-    let keys = Object.keys(localStorage);
+    let keys = getKeys(isSort);
     //keys.reverse();
 
     for (let i=0; i<keys.length; i++)
