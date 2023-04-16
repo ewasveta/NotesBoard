@@ -5,18 +5,22 @@ document.querySelector("#srt").addEventListener("click", sortDate);
 document.querySelector("#sea").addEventListener("click", searchDate);
 
 function searchDate()
-{
-    //document.querySelector("#dl").placeholder  = "enter date for search";    
+{  
+    let date = document.querySelector("#dl").value;   
+    
+    if (!date)
+    {
+        document.querySelector("#dl").placeholder = "enter date for search";
+        return;
+    }
     document.querySelector("#list").innerHTML = "";
 
-    let date = document.querySelector("#dl").value;    
     let keys = getKeys(false);
     for (let i=0; i<keys.length; i++)
     {
         if(keys[i] == date)
         {
-            let found = JSON.parse(localStorage.getItem(keys[i], "[]"));            
-            console.log(found);
+            let found = JSON.parse(localStorage.getItem(keys[i], "[]"));  
             for(let j=0; j<found.length; j++)
             {
                 let minsName = found[j].split('→');        
@@ -65,11 +69,14 @@ function addDeal()
     let d = document.querySelector("#d").value;
     let t = document.querySelector("#t").value;
 
-    //localStorage.clear();
-    addStorageItem(`${t}→${deal}`, d);
+    if (deal && d && t)
+    {  
+        //localStorage.clear();
+        addStorageItem(`${t}→${deal}`, d);
 
-    createLI(deal, d, t);
-    clearInput(); 
+        createLI(deal, d, t);
+        clearInput(); 
+    }
 }
 
 function createLI(deal, date, time)
@@ -117,18 +124,15 @@ function addStorageItem (item, list)
 function delStorageItem (deal, date, time) 
 {
     let arr = JSON.parse(localStorage.getItem(date, "[]"));
-    console.log(arr);
 
     for(let j=0; j<arr.length; j++)
     {
         let minsName = arr[j].split('→');
-        console.log(minsName);
         if(time == minsName[0]  &&  deal == minsName[1])
         {
             arr.splice(j, 1);
         }
     }
-    console.log(arr);
     if(arr.length != 0) localStorage.setItem(date, JSON.stringify(arr));
     else localStorage.removeItem(date);
 }
